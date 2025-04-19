@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online | Moda y Accesorios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS */
+        .hero-slide {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #EF4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        .add-to-cart {
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navbar -->
+    <nav class="bg-yellow-500 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-red-600">SHOP<span class="text-white">NOW</span></a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-red-600 font-medium transition">Inicio</a>
+                    <a href="#products" class="text-white hover:text-red-600 font-medium transition">Productos</a>
+                    <a href="#offers" class="text-white hover:text-red-600 font-medium transition">Ofertas</a>
+                    <a href="#contact" class="text-white hover:text-red-600 font-medium transition">Contacto</a>
+                    
+                    <!-- Icons -->
+                    <div class="flex items-center space-x-4 ml-4">
+                        <div class="relative">
+                            <a href="#" class="text-white hover:text-red-600">
+                                <i class="fas fa-shopping-cart text-xl"></i>
+                                <span class="cart-count hidden">0</span>
+                            </a>
+                        </div>
+                        <a href="#" class="text-white hover:text-red-600">
+                            <i class="fas fa-user text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <div class="relative mr-4">
+                        <a href="#" class="text-white">
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span class="cart-count hidden">0</span>
+                        </a>
+                    </div>
+                    <button id="mobile-menu-button" class="text-white hover:text-red-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu bg-yellow-500 md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="block px-3 py-2 text-white hover:text-red-600 hover:bg-yellow-600 rounded-md">Inicio</a>
+                <a href="#products" class="block px-3 py-2 text-white hover:text-red-600 hover:bg-yellow-600 rounded-md">Productos</a>
+                <a href="#offers" class="block px-3 py-2 text-white hover:text-red-600 hover:bg-yellow-600 rounded-md">Ofertas</a>
+                <a href="#contact" class="block px-3 py-2 text-white hover:text-red-600 hover:bg-yellow-600 rounded-md">Contacto</a>
+                <a href="#" class="block px-3 py-2 text-white hover:text-red-600 hover:bg-yellow-600 rounded-md">
+                    <i class="fas fa-user mr-2"></i> Mi cuenta
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <div class="hero-slide">
+            <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 py-16 md:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 mb-8 md:mb-0">
+                            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Colección Verano 2023</h1>
+                            <p class="text-lg text-gray-800 mb-6">Descubre las últimas tendencias en moda y accesorios con descuentos exclusivos.</p>
+                            <a href="#products" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg inline-block transition transform hover:scale-105">
+                                Comprar ahora
+                            </a>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center">
+                            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Modelo con ropa de verano" class="rounded-lg shadow-xl max-h-96 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">Categorías Destacadas</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="bg-gray-100 hover:bg-yellow-100 rounded-lg p-4 text-center transition transform hover:scale-105">
+                    <div class="bg-white rounded-full p-4 inline-block mb-2">
+                        <i class="fas fa-tshirt text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800">Ropa</h3>
+                </a>
+                <a href="#" class="bg-gray-100 hover:bg-yellow-100 rounded-lg p-4 text-center transition transform hover:scale-105">
+                    <div class="bg-white rounded-full p-4 inline-block mb-2">
+                        <i class="fas fa-shoe-prints text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800">Zapatos</h3>
+                </a>
+                <a href="#" class="bg-gray-100 hover:bg-yellow-100 rounded-lg p-4 text-center transition transform hover:scale-105">
+                    <div class="bg-white rounded-full p-4 inline-block mb-2">
+                        <i class="fas fa-clock text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800">Accesorios</h3>
+                </a>
+                <a href="#" class="bg-gray-100 hover:bg-yellow-100 rounded-lg p-4 text-center transition transform hover:scale-105">
+                    <div class="bg-white rounded-full p-4 inline-block mb-2">
+                        <i class="fas fa-perfume text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="font-medium text-gray-800">Belleza</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-900">Nuestros Productos</h2>
+                <a href="#" class="text-red-600 hover:text-red-700 font-medium">Ver todos <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                             alt="Camiseta blanca" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Camiseta Básica Blanca</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(24)</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Camiseta de algodón 100% premium, ideal para cualquier ocasión.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900">$19.99</span>
+                            <button class="add-to-cart bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Zapatillas deportivas" class="w-full h-64 object-cover">
+                        <span class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">-20%</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Zapatillas Running Pro</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(42)</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Zapatillas deportivas con tecnología de amortiguación avanzada.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-gray-900">$79.99</span>
+                                <span class="text-gray-500 text-sm line-through ml-2">$99.99</span>
+                            </div>
+                            <button class="add-to-cart bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" 
+                             alt="Reloj de lujo" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Reloj Elegante Negro</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(128)</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Reloj de pulsera con correa de cuero genuino y resistencia al agua.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900">$149.99</span>
+                            <button class="add-to-cart bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb1c4f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80" 
+                             alt="Mochila urbana" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Mochila Urbana</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm ml-2">(56)</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-3">Mochila resistente con múltiples compartimentos y diseño ergonómico.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-gray-900">$49.99</span>
+                            <button class="add-to-cart bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section id="offers" class="py-12 bg-red-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold mb-2">Ofertas Especiales</h2>
+                <p class="max-w-2xl mx-auto">Aprovecha nuestras promociones por tiempo limitado</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Offer 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1625&q=80" 
+                             alt="Oferta 1" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 bg-yellow-500 text-red-600 font-bold px-3 py-1 rounded-bl-lg">
+                            -30%
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Pack Verano</h3>
+                        <p class="text-gray-600 text-sm mb-3">3 camisetas por el precio de 2. Varios colores disponibles.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-gray-900">$39.99</span>
+                                <span class="text-gray-500 text-sm line-through ml-2">$59.99</span>
+                            </div>
+                            <button class="add-to-cart bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Offer 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" 
+                             alt="Oferta 2" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 bg-yellow-500 text-red-600 font-bold px-3 py-1 rounded-bl-lg">
+                            -50%
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Zapatos Deportivos</h3>
+                        <p class="text-gray-600 text-sm mb-3">Edición limitada. Solo quedan 15 pares en stock.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-gray-900">$49.99</span>
+                                <span class="text-gray-500 text-sm line-through ml-2">$99.99</span>
+                            </div>
+                            <button class="add-to-cart bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Offer 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Oferta 3" class="w-full h-48 object-cover">
+                        <div class="absolute top-0 right-0 bg-yellow-500 text-red-600 font-bold px-3 py-1 rounded-bl-lg">
+                            -40%
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Cámara Vintage</h3>
+                        <p class="text-gray-600 text-sm mb-3">Cámara retro con lentes intercambiables. Incluye estuche.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-gray-900">$119.99</span>
+                                <span class="text-gray-500 text-sm line-through ml-2">$199.99</span>
+                            </div>
+                            <button class="add-to-cart bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm transition">
+                                <i class="fas fa-cart-plus mr-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-12">Lo que dicen nuestros clientes</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">Hace 2 semanas</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Excelente calidad de los productos y entrega súper rápida. Volveré a comprar sin duda."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">María González</h4>
+                            <p class="text-gray-600 text-sm">Buenos Aires</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">Hace 1 mes</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Buena relación calidad-precio. El servicio al cliente resolvió rápidamente una pequeña incidencia."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">Carlos López</h4>
+                            <p class="text-gray-600 text-sm">Córdoba</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="text-gray-600 text-sm">Hace 3 días</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Me encantó el diseño de los productos. Solo sugeriría más opciones de tallas."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <h4 class="font-medium text-gray-900">Ana Martínez</h4>
+                            <p class="text-gray-600 text-sm">Mendoza</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-yellow-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Suscríbete a nuestro newsletter</h2>
+            <p class="text-gray-700 mb-6">Recibe ofertas exclusivas y novedades directamente en tu email.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+                <input type="email" placeholder="Tu email" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded-lg transition">
+                    Suscribirse
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">SHOPNOW</h3>
+                    <p class="text-gray-400 mb-4">Tienda online líder en moda y accesorios. Calidad garantizada y servicio excepcional.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-500 transition">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Enlaces Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Inicio</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-yellow-500 transition">Productos</a></li>
+                        <li><a href="#offers" class="text-gray-400 hover:text-yellow-500 transition">Ofertas</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Nuevos Lanzamientos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Servicio al Cliente</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Contacto</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Política de Devoluciones</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Términos y Condiciones</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-yellow-500 transition">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contacto</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-500 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Av. Corrientes 1234, Buenos Aires, Argentina</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-yellow-500 mr-3"></i>
+                            <span class="text-gray-400">+54 11 1234-5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-yellow-500 mr-3"></i>
+                            <span class="text-gray-400">info@shopnow.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-yellow-500 mr-3"></i>
+                            <span class="text-gray-400">Lunes a Viernes: 9am - 6pm</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 SHOPNOW. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <img src="https://via.placeholder.com/40x25" alt="Visa" class="h-6">
+                    <img src="https://via.placeholder.com/40x25" alt="Mastercard" class="h-6">
+                    <img src="https://via.placeholder.com/40x25" alt="American Express" class="h-6">
+                    <img src="https://via.placeholder.com/40x25" alt="PayPal" class="h-6">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 w-full md:w-96 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Tu Carrito</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-red-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="space-y-4 mb-6">
+                <!-- Cart items will be added here dynamically -->
+                <p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span id="cart-subtotal" class="font-bold">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Envío</span>
+                    <span class="font-bold">Gratis</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+            </div>
+            
+            <button class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg mb-4 transition">
+                Finalizar Compra
+            </button>
+            <button class="w-full border border-gray-300 text-gray-700 font-bold py-3 px-4 rounded-lg hover:bg-gray-100 transition">
+                Seguir Comprando
+            </button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Shopping Cart Functionality
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const closeCartButton = document.getElementById('close-cart');
+        const cartCountElements = document.querySelectorAll('.cart-count');
+        let cartItems = [];
+        let cartTotal = 0;
+        
+        // Sample product data
+        const products = [
+            { id: 1, name: 'Camiseta Básica Blanca', price: 19.99, image: 'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80' },
+            { id: 2, name: 'Zapatillas Running Pro', price: 79.99, image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80' },
+            { id: 3, name: 'Reloj Elegante Negro', price: 149.99, image: 'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80' },
+            { id: 4, name: 'Mochila Urbana', price: 49.99, image: 'https://images.unsplash.com/photo-1591047139829-d91aecb1c4f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1636&q=80' }
+        ];
+        
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                // In a real app, you would get the product ID from a data attribute
+                const productId = parseInt(this.closest('.product-card').getAttribute('data-id') || '1');
+                const product = products.find(p => p.id === productId);
+                
+                addToCart(product);
+            });
+        });
+        
+        function addToCart(product) {
+            // Check if product already in cart
+            const existingItem = cartItems.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showCart();
+        }
+        
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotalElement = document.getElementById('cart-total');
+            
+            // Calculate totals
+            let subtotal = 0;
+            let itemCount = 0;
+            
+            cartItemsContainer.innerHTML = '';
+            
+            if (cartItems.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>';
+            } else {
+                cartItems.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    itemCount += item.quantity;
+                    
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'flex items-start border-b border-gray-200 pb-4';
+                    cartItemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded mr-4">
+                        <div class="flex-grow">
+                            <h4 class="font-medium text-gray-800">${item.name}</h4>
+                            <p class="text-gray-600 text-sm">$${item.price.toFixed(2)}</p>
+                            <div class="flex items-center mt-2">
+                                <button class="decrease-quantity text-gray-500 hover:text-red-600" data-id="${item.id}">
+                                    <i class="fas fa-minus text-xs"></i>
+                                </button>
+                                <span class="mx-2">${item.quantity}</span>
+                                <button class="increase-quantity text-gray-500 hover:text-red-600" data-id="${item.id}">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium">$${itemTotal.toFixed(2)}</p>
+                            <button class="remove-item text-red-600 hover:text-red-800 text-sm mt-2" data-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsContainer.appendChild(cartItemElement);
+                });
+            }
+            
+            // Update totals
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotalElement.textContent = `$${subtotal.toFixed(2)}`;
+            
+            // Update cart count
+            cartCountElements.forEach(el => {
+                if (itemCount > 0) {
+                    el.textContent = itemCount;
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+            
+            // Add event listeners to new buttons
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(id, -1);
+                });
+            });
+            
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    updateQuantity(id, 1);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    removeItem(id);
+                });
+            });
+        }
+        
+        function updateQuantity(id, change) {
+            const item = cartItems.find(item => item.id === id);
+            
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    cartItems = cartItems.filter(item => item.id !== id);
+                }
+                
+                updateCart();
+            }
+        }
+        
+        function removeItem(id) {
+            cartItems = cartItems.filter(item => item.id !== id);
+            updateCart();
+        }
+        
+        function showCart() {
+            cartSidebar.classList.remove('translate-x-full');
+            cartOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function hideCart() {
+            cartSidebar.classList.add('translate-x-full');
+            cartOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Event listeners for cart
+        document.querySelectorAll('[href="#"], .fa-shopping-cart').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                showCart();
+            });
+        });
+        
+        closeCartButton.addEventListener('click', hideCart);
+        cartOverlay.addEventListener('click', hideCart);
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+        
+        // Add data-id attributes to product cards for demo
+        document.querySelectorAll('.product-card').forEach((card, index) => {
+            card.setAttribute('data-id', index + 1);
+        });
+    </script>
+</body>
+</html>
